@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/stylesheets/heart.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://js.pusher.com/7.0.3/pusher.min.js"></script>
+    <% if(user) { %>
+        <div class="card mb-3" style="max-width: 25rem;">
+            <img src="../images/<%- (Math.floor(Math.random() * 14) + 1) %>.jpg" class="img-fluid rounded-start"
+                        alt="avatar">
+            <div class="card-body">
+                <a href="/users/<%= user._id %>" style="text-decoration: none;">
+                    <h5 class="card-title">
+                        <%= user.username %>
+                    </h5>
+                </a>
+                <div id="<%= user._id %>" class="heart-like-button"></div>
+                <span id='hearts-count-<%= user._id %>' class="hearts-count">
+                    <%= hearts_count %>
+                </span>
+                <hr>
+                <p class="card-text">User description</p>
+            </div>
+          </div>
+        <% }%>
+            <script>
+                const isLoggedIn = <%= currentUser ? 1 : 0 %>;
+                const currentUser = <%- JSON.stringify(currentUser || 0) %>;
+            </script>
+            <div id="messages"></div>
+            <script src="/javascripts/heart.js"></script>
+            <script src="/javascripts/show.js"></script>

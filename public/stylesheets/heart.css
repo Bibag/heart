@@ -1,0 +1,61 @@
+.heart-like-button {
+    display: inline-block;
+    position: relative;
+    width: 32px;
+    height: 26px;
+  }
+  .hearts-count{
+    display: inline-block;
+  }
+
+  .heart-like-button:before {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    width: 16px;
+    height: 25px;
+    border-radius: 8px 8px 0 0;
+    background-color: #c01a1a;
+    content: "";
+    cursor: pointer;
+    transition: background .4s;
+  }
+  .heart-like-button:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin :100% 100%;
+    width: 16px;
+    height: 25px;
+    border-radius: 8px 8px 0 0;
+    background-color: #c01a1a;
+    content: "";
+    cursor: pointer;
+    transition: background .4s;
+  }
+  .heart-like-button.liked::before,
+  .heart-like-button.liked::after {
+    background-color: #c01a1a;
+  }
+  .heart-like-button.liked {
+    animation: liked .4s ease;
+  }
+  @keyframes liked {
+    0% {
+      transform: scale(.8);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .card {
+    margin: 0 auto;
+    float: none; 
+}

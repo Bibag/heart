@@ -1,0 +1,15 @@
+<% layout('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/stylesheets/heart.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://js.pusher.com/7.0.3/pusher.min.js"></script>
+
+    <div class="row" id="user-list">
+    </div>
+    
+    <script>
+        const data = <%- JSON.stringify(data) %>;
+        const isLoggedIn = <%= currentUser ? 1 : 0 %>;
+        const currentUser = <%- JSON.stringify(currentUser || 0) %>;
+    </script>
+    <script src="/javascripts/heart.js"></script>
+    <script src="/javascripts/index.js"></script>

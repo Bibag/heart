@@ -45,7 +45,7 @@ if (data.length) {
         heartBtn.id = user.user._id;
         if (isLoggedIn) {
             if (user.user._id !== currentUser._id) {
-                heartBtn.addEventListener('click', () => {
+                heartBtn.addEventListener('click', (event) => {
                     actOnUpHeart(event);
                     heartBtn.classList.add("liked");
                     setTimeout(() => {
@@ -66,7 +66,7 @@ if (data.length) {
 
         const span = document.createElement('span');
         span.id = `hearts-count-${user.user._id}`;
-        span.classList.add('hearts-count-1');
+        span.classList.add('hearts-count');
         span.textContent = user.hearts_count;
         divCardBody.appendChild(span);
         divCard.appendChild(divCardBody);

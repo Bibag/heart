@@ -10,11 +10,11 @@ const actOnUpHeart = (event) => {
 };
 
 //Add eventListener to heart button
-const heartBtn=document.querySelector('.heart-like-button');
+const heartBtn = document.querySelector('.heart-like-button');
 const viewUserId = heartBtn.id;
 if (isLoggedIn) {
     if (viewUserId !== currentUser._id) {
-        heartBtn.addEventListener('click', () => {
+        heartBtn.addEventListener('click', (event) => {
             actOnUpHeart(event);
             heartBtn.classList.add("liked");
             setTimeout(() => {

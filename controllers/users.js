@@ -36,11 +36,27 @@ module.exports.logout = (req, res) => {
     res.redirect('/users');
 }
 
+// module.exports.index = async (req, res, next) => {
+//     const data = [];
+//     const users = await User.find({});
+//     for (let user of users) {
+//         const heart = await Heart.findOne({ user: user._id });
+//         const hearts_count = heart.hearts_count;
+//         data.push({ user, hearts_count });
+//     }
+//     res.render('users/index', { data });
+// }
+
 module.exports.index = async (req, res, next) => {
     const data = [];
     const users = await User.find({});
+    const hearts = await Heart.find({});
+    console.log(hearts);
     for (let user of users) {
-        const heart = await Heart.findOne({ user: user._id });
+        // const heart = hearts.find(element => JSON.stringify(element.user) === JSON.stringify(user._id));
+        const index = hearts.findIndex(element => JSON.stringify(element.user) === JSON.stringify(user._id));
+        const heart = hearts[index];
+        hearts.splice(index, 1);
         const hearts_count = heart.hearts_count;
         data.push({ user, hearts_count });
     }

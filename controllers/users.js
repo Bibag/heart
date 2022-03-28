@@ -52,13 +52,21 @@ module.exports.index = async (req, res, next) => {
 }
 
 module.exports.showUser = async (req, res, next) => {
-    const { id } = req.params;
-    const user = await User.findById(id);
-    const heart = await Heart.findOne({ user: id });
-    const hearts_count = heart.hearts_count;
-    if (!user) {
-        req.flash('error', 'Cannot find that user!');
-        return res.redirect('/users');
+    if (id.match(/^[0-9a-fA-F]{24}$/)) {
+        const { id } = req.params;
+        const user = await User.findById(id);
+        const heart = await Heart.findOne({ user: id });
+        const hearts_count = heart.hearts_count;
+        if (!user) {
+            req.flash('error', 'Cannot find that user!');
+            return res.redirect('/users');
+        }
+        res.render('users/show', { user, hearts_count });
+    } else {
+        if (!user) {
+            req.flash('error', 'Cannot find that user!');
+            return res.redirect('/users');
+        }
     }
-    res.render('users/show', { user, hearts_count });
+
 }

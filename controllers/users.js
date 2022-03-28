@@ -63,10 +63,8 @@ module.exports.showUser = async (req, res, next) => {
         }
         res.render('users/show', { user, hearts_count });
     } else {
-        if (!user) {
-            req.flash('error', 'Cannot find that user!');
-            return res.redirect('/users');
-        }
+        req.flash('error', 'Cannot find that user!');
+        return res.redirect('/users');
     }
 
 }

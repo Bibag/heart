@@ -30,21 +30,21 @@ if (data.length) {
         divCardBody.classList.add('card-body');
 
         const a = document.createElement('a');
-        a.setAttribute('href', `/users/${user.user._id}`);
+        a.setAttribute('href', `/users/${user._id}`);
         a.style.textDecoration = 'none';
         a.style.color = 'black';
 
         const h5 = document.createElement('h5');
         h5.classList.add('card-title');
-        h5.textContent = user.user.username;
+        h5.textContent = user.username;
         a.appendChild(h5);
         divCardBody.appendChild(a);
 
         const heartBtn = document.createElement('div');
         heartBtn.classList.add('heart-like-button');
-        heartBtn.id = user.user._id;
+        heartBtn.id = user._id;
         if (isLoggedIn) {
-            if (user.user._id !== currentUser._id) {
+            if (user._id !== currentUser._id) {
                 heartBtn.addEventListener('click', (event) => {
                     actOnUpHeart(event);
                     heartBtn.classList.add("liked");
@@ -65,9 +65,9 @@ if (data.length) {
         divCardBody.appendChild(heartBtn);
 
         const span = document.createElement('span');
-        span.id = `hearts-count-${user.user._id}`;
+        span.id = `hearts-count-${user._id}`;
         span.classList.add('hearts-count');
-        span.textContent = user.hearts_count;
+        span.textContent = user.hearts.hearts_count;
         divCardBody.appendChild(span);
         divCard.appendChild(divCardBody);
         col.appendChild(divCard);

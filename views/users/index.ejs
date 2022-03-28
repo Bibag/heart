@@ -7,7 +7,7 @@
     </div>
     
     <script>
-        const data = <%- JSON.stringify(data) %>;
+        const data = <%- JSON.stringify(users) %>;
         const isLoggedIn = <%= currentUser ? 1 : 0 %>;
         const currentUser = <%- JSON.stringify(currentUser || 0) %>;
     </script>

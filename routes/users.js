@@ -17,6 +17,6 @@ router.get('/logout', users.logout);
 
 router.get('/users/:id', isLoggedIn, users.showUser);
 
-router.get('/users', users.index);
+router.get('/users', catchAsync(users.index));
 
 module.exports = router;

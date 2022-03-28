@@ -7,6 +7,15 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Email cannot be blank'],
         unique: true
+    },
+    hearts: {
+        hearts_count: Number,
+        author: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ]
     }
 });
 userSchema.plugin(passportLocalMongoose);

@@ -2,14 +2,39 @@
     <link rel="stylesheet" href="/stylesheets/heart.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://js.pusher.com/7.0.3/pusher.min.js"></script>
-
     <div class="row" id="user-list">
+        <% if(users.length){ %>
+            <% for(let user of users){ %>
+                <div class="col my-3">
+                    <div class="card" style="width: 20rem;">
+                        <img src="../images/<%- (Math.floor(Math.random() * 14) + 1) %>.jpg" class="card-img-top"
+                            alt="avatar">
+                        <div class="card-body">
+                            <a href="/users/<%= user._id %>" style="text-decoration: none; color: black;">
+                                <h5 class="card-title">
+                                    <%= user.username %>
+                                </h5>
+                            </a>
+                            <% if(currentUser){ %>
+                                <% if(user._id.equals(currentUser._id)){ %>
+                                    <div id="<%= user._id %>" class="heart-like-button heart-like-button-current-user">
+                                    </div>
+                                    <% }else { %>
+                                        <div id="<%= user._id %>"
+                                            class="heart-like-button heart-like-button-other-user">
+                                        </div>
+                                        <% } %>
+                                            <% }else{ %>
+                                                <div id="<%= user._id %>"
+                                                    class="heart-like-button heart-like-button-guest">
+                                                </div>
+                                                <% } %>
+                                                    <span id='hearts-count-<%= user._id %>' class="hearts-count">
+                                                        <%= user.hearts.hearts_count %>
+                                                    </span>
+                        </div>
+                    </div>
+                </div>
+                <% }} %>
     </div>
-    
-    <script>
-        const data = <%- JSON.stringify(users) %>;
-        const isLoggedIn = <%= currentUser ? 1 : 0 %>;
-        const currentUser = <%- JSON.stringify(currentUser || 0) %>;
-    </script>
     <script src="/javascripts/heart.js"></script>
-    <script src="/javascripts/index.js"></script>

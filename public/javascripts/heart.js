@@ -33,3 +33,23 @@ channel.bind('upHeartAction', (data) => {
     const action = data.action;
     updateHeartStatus[action](data.userId);
 });
+
+//Add eventListener to all heart buttons except the one for current logged in user
+const heartButtons = document.querySelectorAll('.heart-like-button-other-user');
+if (heartButtons.length) {
+    for (let heartButton of heartButtons) {
+        heartButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            heartButton.classList.add("liked");
+            setTimeout(() => {
+                heartButton.classList.remove("liked");
+            }, 100);
+            const userId = event.target.id;
+            const action = 'upHeart';
+            updateHeartStatus[action](userId);
+            axios.put('/heart/' + userId, { action: action, socketId: socketId })
+                .then(res => { })
+                .catch(error => console.log('Request failed!', error))
+        });
+    }
+}

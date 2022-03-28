@@ -52,6 +52,7 @@ module.exports.index = async (req, res, next) => {
 }
 
 module.exports.showUser = async (req, res, next) => {
+    const { id } = req.params;
     if (id.match(/^[0-9a-fA-F]{24}$/)) {
         const { id } = req.params;
         const user = await User.findById(id);

@@ -16,7 +16,6 @@ const User = require('./models/user');
 const helmet = require('helmet');
 const MongoStore = require('connect-mongo');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 //Require Routes
 const userRoutes = require('./routes/users');
 const heartRoutes = require('./routes/hearts');
@@ -33,9 +32,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //Config and use method
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
-// app.use(methodOverride('_method'));
 app.use(mongoSanitize({
     replaceWith: '_'
 }));

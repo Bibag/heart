@@ -45,7 +45,7 @@ if (heartButtons.length) {
                 heartButton.classList.remove("liked");
             }, 100);
             const userId = event.target.id;
-            const action = 'upHeart';
+            const action = event.target.dataset.action.trim();
             updateHeartStatus[action](userId);
             axios.put('/heart/' + userId, { action: action, socketId: socketId })
                 .then(res => { })

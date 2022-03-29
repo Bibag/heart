@@ -14,9 +14,11 @@
                 </a>
                 <%if(currentUser){ %>
                     <% if(user._id.equals(currentUser._id)){ %>
-                        <div id="<%= user._id %>" class="heart-like-button heart-like-button-current-user"></div>
+                        <div id="<%= user._id %>" class="heart-like-button heart-like-button-current-user"
+                            data-action="upHeart"></div>
                         <% } else{ %>
-                            <div id="<%= user._id %>" class="heart-like-button heart-like-button-other-user"></div>
+                            <div id="<%= user._id %>" class="heart-like-button heart-like-button-other-user"
+                                data-action="upHeart"></div>
                             <% } %>
                                 <% } %>
                                     <span id='hearts-count-<%= user._id %>' class="hearts-count">

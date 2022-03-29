@@ -29,10 +29,22 @@ module.exports.updateHeart = async (req, res, next) => {
     if (id.match(/^[0-9a-fA-F]{24}$/)) {
         const action = req.body.action;
         const socketId = req.body.socketId;
-        User.updateOne({ _id: id }, { $inc: { "hearts.hearts_count": 1 } }, {}, (err, numberAffected) => {
-            pusher.trigger('upHeart-events', 'upHeartAction', { action: action, userId: id }, { socket_id: socketId });
-            res.send('');
-        });
+        const userId = req.user._id;
+        User.updateOne({ _id: id },
+            {
+                $inc: { "hearts.hearts_count": 1 },
+                $push: {
+                    "hearts.author": {
+                        time: new Date(),
+                        user: userId
+                    }
+                }
+            },
+            {},
+            (err, numberAffected) => {
+                pusher.trigger('upHeart-events', 'upHeartAction', { action: action, userId: id }, { socket_id: socketId });
+                res.send('');
+            });
     } else {
         req.flash('error', 'Cannot find that user!');
         return res.redirect('/users');

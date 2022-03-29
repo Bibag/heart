@@ -157,6 +157,13 @@ app.use((error, req, res, next) => {
     res.render('error', { error });
 });
 
+//Catching uncaught exceptions
+process.on('uncaughtException', err => {
+    console.error('There was an uncaught error', err)
+    process.exit(1)
+})
+
+
 //PORT
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

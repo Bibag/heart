@@ -12,8 +12,11 @@ const userSchema = new Schema({
         hearts_count: Number,
         author: [
             {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
+                time: String,
+                user: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'User'
+                }
             }
         ]
     }
